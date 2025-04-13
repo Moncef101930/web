@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Health & Fitness | Catégories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Liens CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+    <style>
+        .events-table-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+            margin-top: 100px;
+        }
+        .events-table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .table {
+            width: 100%;
+            font-size: 18px;
+        }
+        .table thead th {
+            font-weight: 700;
+            padding: 20px 15px;
+            text-transform: uppercase;
+        }
+        .table td, .table th {
+            padding: 18px 15px;
+        }
+        .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .header-area {
+            background-color: #000;
+            padding: 15px 0;
+        }
+        .header-phrase {
+            font-size: 26px;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-area">
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="logo">
+                        <a href="{{ path('app_index') }}">
+                            <img src="{{ asset('assets/img/logo/logo.png') }}" alt="Logo" style="max-height: 60px;">
+                        </a>
+                    </div>
+                    <div class="header-phrase">🎉 Découvrir les catégories 🎉</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <section class="events-table-section">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>Les différentes Catégories</h2>
+                </div>
+
+                <div class="events-table-container">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nom de la catégorie</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if categories is not empty %}
+                                    {% for categorie in categories %}
+                                        <tr>
+                                            <td><strong>{{ categorie.nom }}</strong></td>
+                                            <td>{{ categorie.description }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="2" class="text-center text-muted">Aucune catégorie disponible.</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+        
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

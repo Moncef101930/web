@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des événements{% endblock %}
+
+{% block body %}
+<main>
+    <!-- Section personnalisée pour les événements -->
+    <section class="services-area pt-100 pb-150 section-bg" data-background="assets/img/gallery/section_bg01.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-tittle">Les événements</h2>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nom</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Lieu</th>
+                                    <th>Catégorie(s)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for evenement in evenements %}
+                                    {% if evenement.categories|length > 0 %}
+                                        <tr>
+                                            <td>{{ evenement.id }}</td>
+                                            <td>{{ evenement.nom }}</td>
+                                            <td>{{ evenement.description }}</td>
+                                            <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                                            <td>{{ evenement.lieu }}</td>
+                                            <td>
+                                                {% for categorie in evenement.categories %}
+                                                    {{ categorie.nom }}{% if not loop.last %}, {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" class="text-center">Aucun événement avec catégorie trouvé</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Health & Fitness | Associer Catégorie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* Supprimer marges et paddings par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Barre noire haut/bas */
+        .black-bar {
+            height: 70px;
+            background-color: black;
+            width: 100%;
+            position: fixed;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .black-bar.top {
+            top: 0;
+        }
+
+        .black-bar.bottom {
+            bottom: 0;
+        }
+
+        /* Contenu principal */
+        main {
+            margin-top: 80px;
+            padding-bottom: 80px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .events-table-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+            min-height: calc(100vh - 140px);
+        }
+
+        .events-table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            padding: 10px 15px; /* Réduire la hauteur du champ */
+            font-size: 14px; /* Réduire la taille de la police */
+            width: 80%; /* Réduire la largeur des champs */
+            max-width: 600px; /* Limiter la largeur pour ne pas qu'elle soit trop grande */
+            margin: 0 auto; /* Centrer le champ horizontalement */
+            display: block;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            justify-content: center;
+        }
+
+        .btn-custom-blue {
+            padding: 16px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            min-width: 220px;
+        }
+
+        .btn-custom-blue:hover {
+            background-color: #0069d9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-custom-red {
+            padding: 16px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            min-width: 220px;
+        }
+
+        .btn-custom-red:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Barre noire haut -->
+<div class="black-bar top"></div>
+
+<main class="events-table-section">
+    <div class="container">
+        <div class="events-table-container">
+            <h1>Créer un nouvel événement</h1>
+
+            {{ form_start(form) }}
+            
+            <div class="form-group">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.date) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control', 'min': 'now'|date('Y-m-d')}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.lieu) }}
+                {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <!-- Boutons placés après le champ Lieu -->
+            <div class="button-container">
+                <a href="/evenement" class="btn-custom-blue">Retour à la liste</a>
+                <button type="submit" class="btn-custom-red">Enregistrer</button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+</main>
+
+<!-- Barre noire bas -->
+<div class="black-bar bottom"></div>
+
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Health & Fitness | Catégories</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/gijgo.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/animated-headline.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .btn-custom-red {
+            background-color: #ff4e50;
+            color: white !important;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-custom-red:hover {
+            background-color: #e04547;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-custom-blue {
+            background-color: #007bff;
+            color: white !important;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-custom-blue:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-custom-green {
+            background-color: #28a745;
+            color: white !important;
+            border: none;
+            padding: 14px 32px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-custom-green:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .ml-2 {
+            margin-left: 8px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0;
+            border: 2px solid #ff4e50;
+            border-radius: 6px;
+            background-color: rgba(255, 78, 80, 0.1);
+            margin-top: 10px;
+            padding: 12px;
+        }
+
+        .events-table-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+            margin-top: 100px;
+        }
+
+        .events-table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .table {
+            margin-bottom: 0;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .table thead th {
+            border-top: none;
+            border-bottom: 3px solid #dee2e6;
+            font-weight: 700;
+            color: #333;
+            font-size: 20px;
+            padding: 20px 15px;
+            text-transform: uppercase;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+            padding: 18px 15px;
+            line-height: 1.6;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 50px 0;
+            color: #666;
+            font-size: 20px;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 20px;
+        }
+
+        .header-area {
+            background-color: #000 !important;
+            padding: 15px 0;
+        }
+
+        .header-transparent {
+            background-color: rgba(0, 0, 0, 0.9) !important;
+        }
+
+        .header-sticky.sticky-bar {
+            background: #000 !important;
+        }
+
+        #navigation li a {
+            color: #fff !important;
+            font-size: 18px;
+        }
+
+        #navigation li a:hover {
+            color: #ff4e50 !important;
+        }
+
+        .header-btn {
+            background: #ff4e50;
+            color: white !important;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+
+        .header-btn:hover {
+            background: #e04547;
+        }
+
+        .mobile_menu .slicknav_nav a {
+            color: #fff !important;
+            font-size: 16px;
+        }
+
+        .menu-main {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-phrase {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 26px;
+            color: white;
+            font-weight: 600;
+            white-space: nowrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-right-btn {
+            margin-left: auto;
+            z-index: 1;
+        }
+
+        .logo {
+            margin-right: auto;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .events-table-container {
+                padding: 20px;
+            }
+            .table {
+                font-size: 16px;
+            }
+            .table thead th {
+                font-size: 18px;
+                padding: 15px 10px;
+            }
+            .table td, .table th {
+                padding: 15px 10px;
+            }
+            .section-title h2 {
+                font-size: 32px;
+            }
+            .header-phrase {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-area header-transparent">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-2 col-md-1">
+                        <div class="logo">
+                            <a href="index.html"><img src="assets/img/logo/logo.png" alt="Fitness Club Logo" style="max-width: 85px; height: auto;"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-10 col-lg-10 col-md-10">
+                        <div class="menu-main d-flex align-items-center justify-content-end">
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav></nav>
+                            </div>
+                            <span class="header-phrase d-none d-lg-block">🎉 Découvrir les catégories 🎉</span>
+                            <div class="header-right-btn f-right d-none d-lg-block">
+                                <a href="#" class="btn header-btn">Catégories</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="events-table-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Les différentes Catégories</h2>
+            </div>
+
+            <div class="events-table-container">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom de la catégorie</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for categorie in categories %}
+                            <tr>
+                                <td>{{ categorie.id }}</td>
+                                <td><strong>{{ categorie.nom }}</strong></td>
+                                <td>{{ categorie.description }}</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="{{ path('app_categorie_edit',{'id': categorie.id}) }}" class="btn-custom-blue">Modifier</a>
+                                        <form method="post" action="{{ path('app_categorie_delete', {'id': categorie.id}) }}" style="display: inline;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
+                                            <button class="btn-custom-red ml-2">Supprimer</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Bouton Créer une catégorie -->
+                <div class="text-end mt-4">
+                    <a href="{{ path('app_categorie_new') }}" class="btn-custom-green">Créer une catégorie</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
