@@ -1,0 +1,73 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Utilisateur index{% endblock %}
+
+{% block body %}
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li class="active">Utilisateur index</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <h1>Utilisateur index</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>DateNaissance</th>
+                        <th>Bio</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for utilisateur in utilisateurs %}
+                        <tr>
+                            <td>{{ utilisateur.id }}</td>
+                            <td>{{ utilisateur.nom }}</td>
+                            <td>{{ utilisateur.prenom }}</td>
+                            <td>{{ utilisateur.email }}</td>
+                            <td>{{ utilisateur.role }}</td>
+                            <td>{{ utilisateur.dateNaissance ? utilisateur.dateNaissance|date('Y-m-d') : '' }}</td>
+                            <td>{{ utilisateur.bio }}</td>
+                            <td>
+                                {# Optionally display the image using asset() if it is stored in the public folder #}
+                                <img src="{{ asset('images/' ~ utilisateur.image) }}" alt="{{ utilisateur.nom }}" style="max-width: 50px;">
+                            </td>
+                            <td>
+                                <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}">show</a>
+                                <a href="{{ path('app_utilisateur_edit', {'id': utilisateur.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="btn btn-primary" href="{{ path('app_utilisateur_new') }}">Create new</a>
+        </div>
+    </div>
+{% endblock %}

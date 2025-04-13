@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Health & Fitness | Associer Catégorie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* Nouvelle top bar stylée */
+        .top-bar {
+            background-color: #000;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .top-bar a.top-link {
+            color: #fff;
+            margin-left: 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .top-bar a.top-link:hover {
+            color: #007bff;
+        }
+
+        .black-bar.bottom {
+            height: 12px;
+            background-color: #000;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .btn-custom-blue {
+            background-color: #007bff;
+            color: white !important;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .btn-custom-blue:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .events-table-section {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+            margin-top: 100px;
+        }
+
+        .events-table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header avec logo -->
+<header>
+    <div class="header-area header-transparent">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-2 col-md-1">
+                        <div class="logo">
+                            <a href="index.html">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Tu peux ajouter ici navigation ou boutons supplémentaires si besoin -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Nouvelle top bar stylée -->
+
+
+<!-- Contenu principal -->
+<main class="events-table-section">
+    <div class="container">
+        <div class="events-table-container">
+            {% block body %}
+                <h1>Modifier la Catégorie</h1>
+
+                {{ include('categorie/_form.html.twig', {'button_label': 'Update'}) }}
+
+                <a href="{{ path('app_categorie_index') }}" class="btn-custom-blue">Retour à la liste</a>
+
+            {% endblock %}
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

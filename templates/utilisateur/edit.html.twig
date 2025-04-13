@@ -1,0 +1,100 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit Utilisateur{% endblock %}
+
+{% block body %}
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Edit Utilisateur</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a href="{{ path('home') }}">Dashboard</a></li>
+                        <li class="active">Edit Utilisateur</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">Edit Utilisateur Form</strong>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                                <div class="form-group">
+                                    {{ form_label(form.nom) }}
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.nom) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.prenom) }}
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.prenom) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.email) }}
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.email) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.motDePasse) }}
+                                    {{ form_widget(form.motDePasse, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.motDePasse) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.role) }}
+                                    {{ form_widget(form.role, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.role) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.dateNaissance) }}
+                                    {{ form_widget(form.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.dateNaissance) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.bio) }}
+                                    {{ form_widget(form.bio, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.bio) }}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.image) }}
+                                    {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="text-danger">
+                                        {{ form_errors(form.image) }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
