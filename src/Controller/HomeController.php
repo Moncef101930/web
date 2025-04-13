@@ -9,19 +9,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    #[Route('/a', name: 'app_home')]
     public function index(): Response
     {
         return $this->render('baseback.html.twig');
+    }
+
+    #[Route('/front', name: 'app_home')]
+    public function index2(): Response
+    {
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+        ]);
     }
-   
 
     #[Route('/lien', name: 'app_affichage')]
-public function affichage(): Response
-{
-    return $this->render('categorie/affichage.html.twig');
-
-}
+    public function affichage(): Response
+    {
+        return $this->render('categorie/affichage.html.twig');
+    }
 }
