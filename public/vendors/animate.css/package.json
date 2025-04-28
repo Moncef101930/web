@@ -54,5 +54,8 @@
   },
   "spm": {
     "main": "./animate.css"
+  },
+  "dependencies": {
+    "animate.css": "file:"
   }
 }

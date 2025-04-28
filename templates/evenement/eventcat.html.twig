@@ -1,134 +1,14 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Health & Fitness | Associer Catégorie</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{# templates/utilisateur/index.html.twig #}
+{% extends 'back.html.twig' %}
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="front/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="front/assets/css/style.css">
+{% block title %}Categorie{% endblock %}
 
-    <style>
-        /* Supprimer marges et paddings par défaut */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Barre noire haut/bas */
-        .black-bar {
-            height: 70px;
-            background-color: black;
-            width: 100%;
-            position: fixed;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .black-bar.top {
-            top: 0;
-        }
-
-        .black-bar.bottom {
-            bottom: 0;
-        }
-
-        /* Contenu principal */
-        main {
-            margin-top: 80px; /* Espacement pour la barre noire en haut */
-            padding-bottom: 80px; /* Espacement pour la barre noire en bas */
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        .events-table-section {
-            padding: 60px 0;
-            background-color: #f9f9f9;
-            min-height: calc(100vh - 140px);
-        }
-
-        .events-table-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            padding: 30px;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-
-        .table thead th {
-            border-bottom: 2px solid #dee2e6;
-            font-weight: 700;
-            color: #333;
-            font-size: 18px;
-        }
-
-        .table td, .table th {
-            vertical-align: middle;
-            padding: 15px;
-            font-size: 16px;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: rgba(0,0,0,0.02);
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .form-section {
-            margin: 30px 0;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #007bff;
-        }
-
-        .form-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .btn-custom-blue {
-            padding: 14px 35px;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #007bff;
-            border: none;
-            color: white;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .btn-custom-blue:hover {
-            background-color: #0069d9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .btn-custom-blue:active {
-            transform: translateY(0);
-        }
-
-    </style>
-</head>
-<body>
-
-<!-- Barre noire haut -->
-<div class="black-bar top"></div>
+{% block body %}
 
 <main class="events-table-section">
     <div class="container">
         <div class="events-table-container">
-            {% block body %}
+
                 <h1 class="text-center mb-4">Association de catégorie à l'événement</h1>
 
                 <table class="table mt-4">
@@ -159,13 +39,8 @@
                 <div class="d-flex justify-content-between mt-4">
                     <a href="{{ path('app_evenement_indexy') }}" class="btn btn-secondary">← Retour à la liste</a>
                 </div>
-            {% endblock %}
         </div>
     </div>
 </main>
+{% endblock %}
 
-<!-- Barre noire bas -->
-<div class="black-bar bottom"></div>
-
-</body>
-</html>

@@ -26,13 +26,14 @@
   ],
   "dependencies": {
     "jquery": ">=1.8",
-    "jquery-validation": ">=1.16"
+    "jquery-validation": ">=1.16",
+    "jquery-validation-unobtrusive": "file:"
   },
   "devDependencies": {
     "gulp": "3.9.1",
+    "gulp-line-ending-corrector": "1.0.1",
     "gulp-rename": "1.2.2",
-    "gulp-uglify": "2.0.0",
     "gulp-replace": "0.5.4",
-    "gulp-line-ending-corrector": "1.0.1"
+    "gulp-uglify": "2.0.0"
   }
 }

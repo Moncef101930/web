@@ -1,0 +1,199 @@
+{# templates/front/base.html.twig #}
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Health & Fitness{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <link rel="shortcut icon" href="{{ asset('front/assets/img/favicon.ico') }}">
+
+    {# CSS #}
+    <link rel="stylesheet" href="{{ asset('front/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/slicknav.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/gijgo.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/animated-headline.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/style.css') }}">
+
+    <style>
+      /* keep your custom inline styles here… */
+    </style>
+
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+          <div class="preloader-circle"></div>
+          <div class="preloader-img pere-text">
+            <img src="{{ asset('front/assets/img/logo/loder.png') }}" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Header #}
+    <header>
+      <div class="header-area header-transparent">
+        <div class="main-header header-sticky">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-xl-2 col-lg-2 col-md-1">
+                <div class="logo">
+                  <a href="{{ path('app_home') }}">
+                    <img src="{{ asset('front/assets/img/logo/logo.png') }}"
+                         alt="Logo" style="max-width:85px; height:auto;">
+                  </a>
+                </div>
+              </div>
+              <div class="col-xl-10 col-lg-10 col-md-10">
+                <div class="menu-main d-flex align-items-center justify-content-end">
+                  <div class="main-menu f-right d-none d-lg-block">
+                    <nav>
+                      <ul id="navigation">
+                        <li><a href="{{ path('app_evenement_indexa') }}">Evenement</a></li>
+                        <li><a href="#about-section">About</a></li>
+                        <li><a href="#services-section">Services</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                    <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                      {% if app.user %}
+                        <div class="dropdown">
+                          <a href="#"
+                            class="d-flex align-items-center dropdown-toggle text-white"
+                            id="userDropdown"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <img
+                              src="{{ asset('images/' ~ app.user.image) }}"
+                              alt="Profile"
+                              class="rounded-circle"
+                              style="width:40px; height:40px; object-fit:cover;"
+                            >
+                            <span class="ml-2">{{ app.user.prenom }} {{ app.user.nom }}</span>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ path('app_ticket_index') }}">
+                              Mes Tickets
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_utilisateur_profile') }}">
+                              Mon Profil
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_utilisateur_logout') }}">
+                              Déconnexion
+                            </a>
+                          </div>
+                        </div>
+                      {% else %}
+                        <a href="{{ path('app_utilisateur_register') }}"
+                          class="btn header-btn">Inscription</a>
+                        <a href="{{ path('app_utilisateur_login') }}"
+                          class="btn header-btn ml-2">Login</a>
+                      {% endif %}
+                    </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+<br>
+<br>
+<br>
+<br>
+<br>
+    {# Main placeholder #}
+    <main>
+      {% block main %}{% endblock %}
+    </main>
+
+    {# Footer #}
+    <footer>
+      <div class="footer-area section-bg" data-background="{{ asset('front/assets/img/gallery/section_bg03.png') }}">
+        <div class="container">
+          <div class="footer-top footer-padding">
+            <div class="row d-flex justify-content-between">
+              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>COMPANY</h4>
+                    <ul>
+                      <li><a href="#about-section">About</a></li>
+                      <li><a href="#">Company</a></li>
+                      <li><a href="#">Press & Blog</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {# … other footer columns … #}
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="row d-flex align-items-center">
+              <div class="col-lg-12">
+                <div class="footer-copy-right text-center">
+                  <p>&copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Template by <a href="https://colorlib.com">Colorlib</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to top -->
+    <div id="back-top">
+      <a title="Go to Top" href="#"><i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    {# JS #}
+    <script src="{{ asset('front/assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.slicknav.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/wow.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/animated-headline.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ asset('front/assets/js/gijgo.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/hover-direction-snake.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/contact.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.form.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/mail-script.js') }}"></script>
+    <script src="{{ asset('front/assets/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/plugins.js') }}"></script>
+    <script src="{{ asset('front/assets/js/main.js') }}"></script>
+
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

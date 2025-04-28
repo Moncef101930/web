@@ -125,39 +125,87 @@
     </div>
 
     <!-- Header -->
-    <header>
-        <div class="header-area header-transparent">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col-xl-2 col-lg-2 col-md-1">
-                            <div class="logo">
-                                <a href="index.html"><img src="front/assets/img/logo/logo.png" alt="Fitness Club Logo" style="max-width: 85px; height: auto;"></a>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10">
-                            <div class="menu-main d-flex align-items-center justify-content-end">
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="#about-section">About</a></li>
-                                            <li><a href="#services-section">Services</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="from.html" class="btn header-btn">Inscription</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
+<header>
+  <div class="header-area header-transparent">
+    <div class="main-header header-sticky">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          {# logo stays the same #}
+          <div class="col-xl-2 col-lg-2 col-md-1">
+            <div class="logo">
+              <a href="{{ path('app_home') }}">
+                <img src="{{ asset('front/assets/img/logo/logo.png') }}"
+                     alt="Logo" style="max-width:85px; height:auto;">
+              </a>
             </div>
+          </div>
+
+          <div class="col-xl-10 col-lg-10 col-md-10">
+            <div class="menu-main d-flex align-items-center justify-content-end">
+              {# nav links #}
+              <div class="main-menu f-right d-none d-lg-block">
+                <nav>
+                  <ul id="navigation">
+                    <li><a href="{{ path('app_evenement_indexa') }}">Evenement</a></li>
+                    <li><a href="#about-section">About</a></li>
+                    <li><a href="#services-section">Services</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+              {# conditional Inscription/Login vs. Profile dropdown #}
+               <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                      {% if app.user %}
+                        <div class="dropdown">
+                          <a href="#"
+                            class="d-flex align-items-center dropdown-toggle text-white"
+                            id="userDropdown"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <img
+                              src="{{ asset('images/' ~ app.user.image) }}"
+                              alt="Profile"
+                              class="rounded-circle"
+                              style="width:40px; height:40px; object-fit:cover;"
+                            >
+                            <span class="ml-2">{{ app.user.prenom }} {{ app.user.nom }}</span>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ path('app_ticket_index') }}">
+                              Mes Tickets
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_utilisateur_profile') }}">
+                              Mon Profil
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ path('app_utilisateur_logout') }}">
+                              Déconnexion
+                            </a>
+                          </div>
+                        </div>
+                      {% else %}
+                        <a href="{{ path('app_utilisateur_register') }}"
+                          class="btn header-btn">Inscription</a>
+                        <a href="{{ path('app_utilisateur_login') }}"
+                          class="btn header-btn ml-2">Login</a>
+                      {% endif %}
+                    </div>
+            </div>
+          </div>
+
+          {# mobile menu #}
+          <div class="col-12">
+            <div class="mobile_menu d-block d-lg-none"></div>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </div>
+</header>
+
+
 
     <!-- Main -->
     <main>
@@ -219,7 +267,7 @@
         </section>
 
         <!-- Services Area -->
-        <section id="services-section" class="services-area pt-100 pb-150 section-bg" data-background="assets/img/gallery/section_bg01.png">
+        <section id="services-section" class="services-area pt-100 pb-150 section-bg" data-background="front/assets/img/gallery/section_bg01.png">
             <section class="wantToWork-area w-padding">
                 <div class="container">
                     <div class="row align-items-end justify-content-between">
@@ -241,7 +289,7 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-area section-bg" data-background="assets/img/gallery/section_bg03.png">
+        <div class="footer-area section-bg" data-background="front/assets/img/gallery/section_bg03.png">
             <div class="container">
                 <div class="footer-top footer-padding">
                     <div class="row d-flex justify-content-between">
@@ -280,30 +328,30 @@
     </div>
 
     <!-- JS -->
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
-    <script src="./assets/js/gijgo.min.js"></script>
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-    <script src="./assets/js/jquery.counterup.min.js"></script>
-    <script src="./assets/js/waypoints.min.js"></script>
-    <script src="./assets/js/jquery.countdown.min.js"></script>
-    <script src="./assets/js/hover-direction-snake.min.js"></script>
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="./front/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="./front/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="./front/assets/js/popper.min.js"></script>
+    <script src="./front/assets/js/bootstrap.min.js"></script>
+    <script src="./front/assets/js/jquery.slicknav.min.js"></script>
+    <script src="./front/assets/js/owl.carousel.min.js"></script>
+    <script src="./front/assets/js/slick.min.js"></script>
+    <script src="./front/assets/js/wow.min.js"></script>
+    <script src="./front/assets/js/animated.headline.js"></script>
+    <script src="./front/assets/js/jquery.magnific-popup.js"></script>
+    <script src="./front/assets/js/gijgo.min.js"></script>
+    <script src="./front/assets/js/jquery.nice-select.min.js"></script>
+    <script src="./front/assets/js/jquery.sticky.js"></script>
+    <script src="./front/assets/js/jquery.counterup.min.js"></script>
+    <script src="./front/assets/js/waypoints.min.js"></script>
+    <script src="./front/assets/js/jquery.countdown.min.js"></script>
+    <script src="./front/assets/js/hover-direction-snake.min.js"></script>
+    <script src="./front/assets/js/contact.js"></script>
+    <script src="./front/assets/js/jquery.form.js"></script>
+    <script src="./front/assets/js/jquery.validate.min.js"></script>
+    <script src="./front/assets/js/mail-script.js"></script>
+    <script src="./front/assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="./front/assets/js/plugins.js"></script>
+    <script src="./front/assets/js/main.js"></script>
 
     <script>
         $(document).ready(function(){

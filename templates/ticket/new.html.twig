@@ -1,0 +1,17 @@
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Achat de ticket{% endblock %}
+
+{% block main %}
+<div class="container py-5">
+  <h2>Acheter un ticket pour « {{ evenement.nom }} »</h2>
+  {{ form_start(form) }}
+    <div class="form-group">
+      {{ form_label(form.typeTicket) }}
+      {{ form_widget(form.typeTicket, {attr:{class:'form-control'}}) }}
+      {{ form_errors(form.typeTicket) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Acheter</button>
+  {{ form_end(form) }}
+</div>
+{% endblock %}

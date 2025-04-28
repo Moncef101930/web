@@ -1,357 +1,116 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Health & Fitness | Events</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="front/assets/img/favicon.ico">
-	<!-- CSS here -->
-	<link rel="stylesheet" href="front/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="front/assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="front/assets/css/slicknav.css">
-    <link rel="stylesheet" href="front/assets/css/flaticon.css">
-    <link rel="stylesheet" href="front/assets/css/gijgo.css">
-    <link rel="stylesheet" href="front/assets/css/animate.min.css">
-    <link rel="stylesheet" href="front/assets/css/animated-headline.css">
-	<link rel="stylesheet" href="front/assets/css/magnific-popup.css">
-	<link rel="stylesheet" href="front/assets/css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="front/assets/css/themify-icons.css">
-	<link rel="stylesheet" href="front/assets/css/slick.css">
-	<link rel="stylesheet" href="front/assets/css/nice-select.css">
-	<link rel="stylesheet" href="front/assets/css/style.css">
+{# templates/evenement/index.html.twig #}
+{% extends 'basefront.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
     <style>
-        /* Custom styles for the table - ENHANCED VISIBILITY */
-        .events-table-section {
-            padding: 100px 0;
-            background-color: #f9f9f9;
-            margin-top: 100px;
-        }
-        
-        .events-table-container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            padding: 40px;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-        
-        .table {
-            margin-bottom: 0;
-            width: 100%;
-            font-size: 18px;
-        }
-        
-        .table thead th {
-            border-top: none;
-            border-bottom: 3px solid #dee2e6;
-            font-weight: 700;
-            color: #333;
-            font-size: 20px;
-            padding: 20px 15px;
-            text-transform: uppercase;
-            background-color: #f8f9fa;
-        }
-        
-        .table td, .table th {
-            vertical-align: middle;
-            padding: 18px 15px;
-            line-height: 1.6;
-        }
-        
-        .table-hover tbody tr:hover {
-            background-color: rgba(0,0,0,0.05);
-        }
-        
-        .no-events {
-            text-align: center;
-            padding: 60px 0;
-            color: #666;
-            font-size: 20px;
-        }
-        
-        .section-title {
-            margin-bottom: 50px;
-            text-align: center;
-        }
-        
-        .section-title h2 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        .section-title p {
-            color: #666;
-            font-size: 20px;
-        }
-
-        /* Navbar styles */
-        .header-area {
-            background-color: #000 !important;
-            padding: 15px 0;
-        }
-        
-        .header-transparent {
-            background-color: rgba(0, 0, 0, 0.9) !important;
-        }
-        
-        .header-sticky.sticky-bar {
-            background: #000 !important;
-        }
-        
-        #navigation li a {
-            color: #fff !important;
-            font-size: 18px;
-        }
-        
-        #navigation li a:hover {
-            color: #ff4e50 !important;
-        }
-        
-        .header-btn {
-            background: #ff4e50;
-            color: white !important;
-            border: none;
-            padding: 12px 25px;
-            font-size: 18px;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        
-        .header-btn:hover {
-            background: #e04547;
-        }
-        
-        .mobile_menu .slicknav_nav a {
-            color: #fff !important;
-            font-size: 16px;
-        }
-        
-        /* Centered phrase styles */
-        .menu-main {
-            position: relative;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .header-phrase {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            color: white;
-            font-weight: 600;
-            white-space: nowrap;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .header-right-btn {
-            margin-left: auto;
-            z-index: 1;
-        }
-        
-        /* Adjust logo spacing */
-        .logo {
-            margin-right: auto;
-        }
-        
-        /* Table row styling */
-        tbody tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-        
-        /* Make content stand out more */
-        .table td strong {
-            font-size: 20px;
-            color: #2c3e50;
-        }
-        
-        .badge-primary {
-            font-size: 16px;
-            padding: 8px 12px;
-        }
-        
-        /* Ticket button styles */
-        .btn-ticket {
-            background-color: #ff4e50;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-align: center;
-            min-width: 100px;
-        }
-        
-        .btn-ticket:hover {
-            background-color: #e04547;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-decoration: none;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .events-table-container {
-                padding: 30px;
-            }
-            
-            .table {
-                font-size: 16px;
-            }
-            
-            .table thead th {
-                font-size: 18px;
-                padding: 15px 10px;
-            }
-            
-            .table td, .table th {
-                padding: 15px 10px;
-            }
-            
-            .section-title h2 {
-                font-size: 36px;
-            }
-            
-            .btn-ticket {
-                padding: 6px 15px;
-                font-size: 14px;
-                min-width: 80px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .events-table-container {
-                padding: 20px;
-            }
-            
-            .table {
-                font-size: 15px;
-            }
-            
-            .table thead th {
-                font-size: 16px;
-            }
-            
-            .section-title h2 {
-                font-size: 30px;
-            }
-            
-            .header-phrase {
-                font-size: 20px;
-            }
-            
-            .btn-ticket {
-                padding: 5px 12px;
-                font-size: 13px;
-                min-width: 70px;
-            }
-        }
+      /* make the search‐icon button smaller */
+      .search-icon {
+        font-size: 16px !important;   /* smaller icon */
+        padding: 4px !important;      /* very little padding */
+        width: auto !important;       /* don’t force a large width */
+      }
+      /* optionally tighten up the input so the icon sits nicely */
+      .search-input {
+        padding-right: 36px;
+      }
     </style>
-</head>
-<body>
-    <!-- Header Start -->
-    <header>
-        <div class="header-area header-transparent">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2 col-md-1">
-                            <div class="logo">
-                                <a href="index.html"><img src="front/assets/img/logo/logo.png" alt="Fitness Club Logo" style="max-width: 100px; height: auto;"></a>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10">
-                            <div class="menu-main d-flex align-items-center justify-content-end">
-                                <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav></nav>
-                                </div>
-                                <span class="header-phrase d-none d-lg-block">🎉 Découvrir les différents événements et catégories 🎉</span>
-                                <div class="header-right-btn f-right d-none d-lg-block">
-                                </div>
-                            </div>
-                        </div>   
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
+{% endblock %}
 
-    <main>
-        <!-- Events Table Section -->
-        <section class="events-table-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>ÉVÉNEMENTS À VENIR</h2>
-                </div>
-            
-                <div class="events-table-container">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                        
-                                    <th>NOM DE L'ÉVÉNEMENT</th>
-                                    <th>DESCRIPTION</th>
-                                    <th>DATE</th>
-                                    <th>LIEU</th>
-                                    <th>CATÉGORIES</th>
-                                    <th>ACHAT</th> <!-- Nouvelle colonne ajoutée -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {% for evenement in evenements %}
-                                {% if evenement.categories|length > 0 %}
-                                    <tr>
-                                       
-                                        <td><strong>{{ evenement.nom }}</strong></td>
-                                        <td>{{ evenement.description }}</td>
-                                        <td>{{ evenement.date ? evenement.date|date('d/m/Y') : '' }}</td>
-                                        <td>{{ evenement.lieu }}</td>
-                                        <td>
-                                            {% for categorie in evenement.categories %}
-                                                <span class="badge badge-primary">{{ categorie.nom }}</span>
-                                            {% endfor %}
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn-ticket">Ticket</a> <!-- Bouton rouge ajouté -->
-                                        </td>
-                                    </tr>
-                                {% endif %}
-                            {% else %}
-                                <tr>
-                                    <td colspan="7" class="no-events">Aucun événement trouvé</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Events Table Section End -->
-    </main>
+{% block title %}Événements à venir{% endblock %}
 
-    <!-- Footer and scripts remain unchanged -->
-</body>
-</html>
+{% block main %}
+<section class="events-section py-5 bg-light">
+  <div class="container">
+    <div class="row mb-4 align-items-center">
+      <div class="col-md-6">
+        <h2 class="font-weight-bold">Événements à venir</h2>
+        {% if searchTerm %}
+          <p class="text-muted">Résultats pour : « {{ searchTerm }} »</p>
+        {% endif %}
+      </div>
+      <div class="col-md-6">
+        <form method="get" action="{{ path('app_evenement_indexa') }}" class="form-inline justify-content-md-end">
+          <div class="input-group w-100 w-md-auto">
+            <input
+              type="text"
+              name="search"
+              class="form-control"
+              placeholder="Rechercher un événement…"
+              value="{{ searchTerm }}"
+            >
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {% if evenements|length > 0 %}
+      <div class="row">
+        {% for evenement in evenements %}
+          {% if evenement.categories|length > 0 %}
+            <div class="col-sm-6 col-lg-4 mb-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">{{ evenement.nom }}</h5>
+                  <p class="text-muted small mb-2">
+                    <i class="far fa-calendar-alt"></i>
+                    {{ evenement.date ? evenement.date|date('d/m/Y') : '—' }}
+                    &nbsp;|&nbsp;
+                    <i class="fas fa-map-marker-alt"></i>
+                    {{ evenement.lieu }}
+                  </p>
+                  <p class="card-text flex-grow-1">
+                    {{ evenement.description|length > 100
+                       ? evenement.description|slice(0, 100) ~ '…'
+                       : evenement.description }}
+                  </p>
+                  <div class="mb-3">
+                    {% for categorie in evenement.categories %}
+                      <span class="badge badge-info badge-pill mr-1">
+                        {{ categorie.nom }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                  <a
+                    href="{{ path('app_ticket_new', {id: evenement.id}) }}"
+                    class="btn btn-outline-primary btn-block mt-auto"
+                  >
+                    Acheter un ticket
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="alert alert-warning text-center">
+        {% if searchTerm %}
+          Aucun événement trouvé pour « {{ searchTerm }} »
+        {% else %}
+          Aucun événement trouvé.
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="famous-event-banner mt-5 p-4 bg-dark text-white rounded d-flex flex-column flex-md-row justify-content-between align-items-center">
+  <div class="mb-3 mb-md-0">
+    {% if mostFamousEventName %}
+      <h5 class="mb-1 text-white">Événement le plus célèbre :</h5>
+      <h3 class="font-weight-bold mb-0 text-white">{{ mostFamousEventName }}</h3>
+    {% else %}
+      <p class="mb-0 text-white">Aucun événement célèbre trouvé.</p>
+    {% endif %}
+  </div>
+  <a href="{{ path('app_user_fire') }}" class="btn btn-outline-light btn-lg">
+    🔥 Voir les catégories 🔥
+  </a>
+</div>
+
+  </div>
+</section>
+{% endblock %}

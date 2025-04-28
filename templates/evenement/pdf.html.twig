@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Événements</title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 12px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Liste des Événements</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Lieu</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evenement in evenements %}
+                <tr>
+                    <td>{{ evenement.id }}</td>
+                    <td>{{ evenement.nom }}</td>
+                    <td>{{ evenement.description }}</td>
+                    <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ evenement.lieu }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun événement trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

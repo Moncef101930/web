@@ -1,0 +1,166 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Health & Fitness | Catégories</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/gijgo.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/animated-headline.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Styles similaires à user.html.twig avec ajouts spécifiques */
+        .categories-section {
+            padding: 100px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .categories-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        
+        .chart-container {
+            height: 400px;
+            margin: 30px 0;
+        }
+        
+        .category-badge {
+            font-size: 16px;
+            padding: 10px 15px;
+            margin: 5px;
+            display: inline-block;
+        }
+        
+        /* [Autres styles inchangés...] */
+    </style>
+</head>
+<body>
+    <!-- Header (identique à user.html.twig) -->
+    <header>
+        <div class="header-area header-transparent">
+            <!-- [Contenu du header inchangé...] -->
+        </div>
+    </header>
+
+    <main>
+        <section class="categories-section">
+            <div class="container">
+                <div class="categories-container">
+                    <div class="section-title">
+                        <h2>STATISTIQUES PAR CATÉGORIE</h2>
+                        {% if mostFamousEventName %}
+                            <p>Événement le plus populaire : <strong>{{ mostFamousEventName }}</strong></p>
+                        {% endif %}
+                    </div>
+
+                    <div class="chart-container">
+                        <!-- Graphique Chart.js -->
+                        <canvas id="categoriesChart"></canvas>
+                    </div>
+
+                    <div class="categories-list">
+                        <h3>Répartition des événements :</h3>
+                        {% for category in categoriesNames %}
+                            <span class="badge badge-primary category-badge">
+                                {{ category }}: {{ eventCountsByCategory[loop.index0] }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/jquery.slicknav.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/contact.js"></script>
+    <script src="assets/js/jquery.form.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/mail-script.js"></script>
+    <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('categoriesChart').getContext('2d');
+            const categoriesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ categoriesNames|json_encode|raw }},
+                    datasets: [{
+                        label: 'Nombre d\'événements par catégorie',
+                        data: {{ eventCountsByCategory|json_encode|raw }},
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Nombre d\'événements'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Catégories'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

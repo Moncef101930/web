@@ -1,0 +1,129 @@
+{# templates/utilisateur/register.html.twig #}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | Health & Fitness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ asset('front/assets/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('front/assets/css/fontawesome-all.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('front/assets/css/style.css') }}">
+  <style>
+    body { background-color: #f7f7f7; padding-top: 50px; }
+    .register-container {
+      max-width: 500px; margin: 0 auto; background: #fff;
+      padding: 30px; border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .register-container h2 { text-align:center; margin-bottom:20px; }
+    .form-group { margin-bottom:15px; }
+    .form-control { border-radius:5px; }
+    .btn { width:100%; padding:10px; border-radius:5px; }
+    .login-link { text-align:center; margin-top:15px; }
+    .login-link a { text-decoration:none; color:#fdc632; }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register</h2>
+
+    {{ form_start(form, {
+      action: path('app_utilisateur_register'),
+      method: 'POST',
+      attr: { enctype: 'multipart/form-data', novalidate:'novalidate' }
+    }) }}
+
+      {# global form errors #}
+      {% if form_errors(form) %}
+        <div class="text-danger mb-3">
+          {{ form_errors(form) }}
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        {{ form_label(form.nom, 'Nom') }}
+        {{ form_widget(form.nom, { attr:{ class:'form-control', required:'required' } }) }}
+        {% if form_errors(form.nom) %}
+          <div class="text-danger">{{ form_errors(form.nom) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.prenom, 'Prenom') }}
+        {{ form_widget(form.prenom, { attr:{ class:'form-control', required:'required' } }) }}
+        {% if form_errors(form.prenom) %}
+          <div class="text-danger">{{ form_errors(form.prenom) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.email, 'Email') }}
+        {{ form_widget(form.email, { attr:{ class:'form-control', required:'required' } }) }}
+        {% if form_errors(form.email) %}
+          <div class="text-danger">{{ form_errors(form.email) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.motDePasse, 'Password') }}
+        {{ form_widget(form.motDePasse, { attr:{ class:'form-control', required:'required' } }) }}
+        {% if form_errors(form.motDePasse) %}
+          <div class="text-danger">{{ form_errors(form.motDePasse) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.role, 'Role') }}
+        {{ form_widget(form.role, { attr:{ class:'form-control', required:'required' } }) }}
+        {% if form_errors(form.role) %}
+          <div class="text-danger">{{ form_errors(form.role) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.dateNaissance, 'Date of Birth') }}
+        {{ form_widget(form.dateNaissance, { attr:{ class:'form-control', required:'required' } }) }}
+        {% if form_errors(form.dateNaissance) %}
+          <div class="text-danger">{{ form_errors(form.dateNaissance) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.bio, 'Bio') }}
+        {{ form_widget(form.bio, { attr:{ class:'form-control', required:'required', rows:4 } }) }}
+        {% if form_errors(form.bio) %}
+          <div class="text-danger">{{ form_errors(form.bio) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.image, 'Profile Image') }}
+        {{ form_widget(form.image, { attr:{ class:'form-control' } }) }}
+        {% if form_errors(form.image) %}
+          <div class="text-danger">{{ form_errors(form.image) }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        {{ form_label(form.captcha) }}
+        {{ form_widget(form.captcha, {
+          attr:{ class:'form-control d-inline-block', style:'width:auto;' }
+        }) }}
+        {% if form_errors(form.captcha) %}
+          <div class="text-danger">{{ form_errors(form.captcha) }}</div>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Register</button>
+
+    {{ form_end(form) }}
+
+    <div class="login-link">
+      <p>Already have an account? <a href="{{ path('app_utilisateur_login') }}">Login here</a></p>
+    </div>
+  </div>
+
+  <script src="{{ asset('front/assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
+  <script src="{{ asset('front/assets/js/bootstrap.min.js') }}"></script>
+</body>
+</html>

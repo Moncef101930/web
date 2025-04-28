@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'utilisateur')]
-class Utilisateur
+class Utilisateur implements UserInterface,PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'IDENTITY')]
@@ -172,4 +174,25 @@ class Utilisateur
         $this->image = $image;
         return $this;
     }
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+    public function eraseCredentials(): void
+    {
+    }
+    
+    public function getPassword(): string
+    {
+        return $this->motDePasse;
+    }
+    public function getRoles(): array
+    {
+        return ['ROLE_'.$this->role];
+    }
+
 }

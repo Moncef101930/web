@@ -1,0 +1,20 @@
+{% extends 'basefront.html.twig' %}
+{% block title %}Réinitialiser le mot de passe{% endblock %}
+{% block main %}
+<div class="container py-5">
+  <h2>Réinitialiser le mot de passe</h2>
+  {{ form_start(resetForm) }}
+    <div class="form-group">
+      {{ form_label(resetForm.plainPassword.first) }}
+      {{ form_widget(resetForm.plainPassword.first, {attr:{class:'form-control'}}) }}
+      {{ form_errors(resetForm.plainPassword.first) }}
+    </div>
+    <div class="form-group">
+      {{ form_label(resetForm.plainPassword.second) }}
+      {{ form_widget(resetForm.plainPassword.second, {attr:{class:'form-control'}}) }}
+      {{ form_errors(resetForm.plainPassword.second) }}
+    </div>
+    <button class="btn btn-primary">Modifier mon mot de passe</button>
+  {{ form_end(resetForm) }}
+</div>
+{% endblock %}

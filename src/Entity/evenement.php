@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\evenementRepository;
 use App\Entity\Categorie;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: evenementRepository::class)]
 #[ORM\Table(name: 'événements')]
@@ -16,6 +18,8 @@ class evenement
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', nullable: false)]
+
+    
     private ?string $nom = null;
 
     #[ORM\Column(type: 'string', nullable: false)]

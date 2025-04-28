@@ -37,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/benpickles/peity/issues"
   },
-  "homepage": "https://github.com/benpickles/peity"
+  "homepage": "https://github.com/benpickles/peity",
+  "dependencies": {
+    "peity": "file:"
+  }
 }

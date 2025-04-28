@@ -1,0 +1,17 @@
+{% extends 'basefront.html.twig' %}
+
+
+{% block title %}Mot de passe oublié{% endblock %}
+{% block main %}
+<div class="container py-5">
+  <h2>Mot de passe oublié</h2>
+  <p>Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.</p>
+  {{ form_start(requestForm) }}
+    <div class="form-group">
+      {{ form_widget(requestForm.email, {attr:{class:'form-control'}}) }}
+      {{ form_errors(requestForm.email) }}
+    </div>
+    <button class="btn btn-primary">Envoyer</button>
+  {{ form_end(requestForm) }}
+</div>
+{% endblock %}

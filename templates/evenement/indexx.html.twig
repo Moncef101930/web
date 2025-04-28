@@ -7,18 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="front/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="front/assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
-        /* Supprimer marges et paddings par défaut */
+    .btn-custom-green {
+    background-color: #28a745; /* Vert */
+    color: white; /* Texte en blanc */
+    border: none; /* Pas de bordure */
+    padding: 10px 20px; /* Espacement à l'intérieur du bouton */
+    font-size: 16px; /* Taille du texte */
+    border-radius: 5px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte */
+    display: inline-block; /* Affichage en ligne */
+    text-decoration: none; /* Enlever le soulignement du lien */
+}
+
+.btn-custom-green:hover {
+    background-color: #218838; /* Vert plus foncé au survol */
+}
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Barre noire haut/bas */
         .black-bar {
             height: 70px;
             background-color: black;
@@ -36,7 +50,6 @@
             bottom: 0;
         }
 
-        /* Contenu principal */
         main {
             margin-top: 80px;
             padding-bottom: 80px;
@@ -91,7 +104,6 @@
             color: #333;
         }
 
-        /* Boutons styles */
         .btn-custom-blue {
             padding: 12px 25px;
             font-size: 16px;
@@ -135,19 +147,17 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* Alignement des boutons */
         .action-buttons {
             display: flex;
             gap: 10px;
         }
 
-        /* Style pour le bouton Créer */
-        .create-btn {
+        .create-pdf-buttons {
             margin-top: 30px;
-            display: inline-block;
+            display: flex;
+            gap: 10px;
         }
 
-        /* Message quand pas d'événements */
         .no-records {
             text-align: center;
             padding: 20px;
@@ -187,10 +197,7 @@
                         <td>{{ evenement.lieu }}</td>
                         <td>
                             <div class="action-buttons">
-                                <!-- Bouton Edit -->
                                 <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn-custom-blue">Modifier</a>
-                                
-                                <!-- Formulaire Delete -->
                                 <form method="POST" action="{{ path('app_evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
                                     <button type="submit" class="btn-custom-red">Supprimer</button>
@@ -206,8 +213,13 @@
                 </tbody>
             </table>
 
-            <!-- Bouton Créer -->
-            <a href="{{ path('app_evenement_creer') }}" class="btn-custom-red create-btn">Créer un événement</a>
+            <!-- Boutons Créer + PDF -->
+            <div class="create-pdf-buttons">
+                <a href="{{ path('app_evenement_creer') }}" class="btn-custom-red">Créer un événement</a>
+                <a href="{{ path('app_evenement_pdf') }}" class="btn-custom-blue">Télécharger PDF</a>
+                <a href="{{ path('app_evenement_statistiquess') }}" class="btn-custom-green">Statistiques</a>
+            </div>
+
         </div>
     </div>
 </main>
@@ -217,14 +229,12 @@
 
 <!-- JavaScript -->
 <script>
-    // Confirmation avant suppression
     function confirmDelete(event) {
         if (!confirm('Êtes-vous sûr de vouloir supprimer cet événement ?')) {
             event.preventDefault();
         }
     }
 
-    // Ajouter les écouteurs d'événements
     document.addEventListener('DOMContentLoaded', function() {
         const deleteForms = document.querySelectorAll('form[action*="delete"]');
         deleteForms.forEach(form => {

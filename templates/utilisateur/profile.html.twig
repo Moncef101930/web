@@ -1,0 +1,93 @@
+
+{% extends 'basefront.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block main %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">Mon Profil</h3>
+        </div>
+        <div class="card-body p-4">
+
+          {{ form_start(form, {
+              attr: { enctype: 'multipart/form-data', class: 'needs-validation', novalidate: 'novalidate' }
+          }) }}
+            {{ form_errors(form) }}
+
+            <div class="d-flex align-items-center mb-4">
+              {% if app.user.image %}
+                <img src="{{ asset('images/' ~ app.user.image) }}"
+                     alt="Avatar"
+                     class="rounded-circle mr-3"
+                     style="width:100px; height:100px; object-fit:cover; border:3px solid #007bff;">
+              {% endif %}
+              <div>
+                <label class="btn btn-outline-primary btn-sm mb-0">
+                  Changer la photo {{ form_widget(form.image, { attr: { class: 'd-none' } }) }}
+                </label>
+                {{ form_errors(form.image) }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-4">
+                {{ form_label(form.nom, 'Nom', { label_attr: { class: 'form-label' } }) }}
+                {{ form_widget(form.nom, { attr: { class: 'form-control', placeholder: 'Nom' } }) }}
+                {{ form_errors(form.nom) }}
+              </div>
+              <div class="form-group col-md-6 mb-4">
+                {{ form_label(form.prenom, 'Prénom', { label_attr: { class: 'form-label' } }) }}
+                {{ form_widget(form.prenom, { attr: { class: 'form-control', placeholder: 'Prénom' } }) }}
+                {{ form_errors(form.prenom) }}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-4">
+                {{ form_label(form.dateNaissance, 'Date de naissance', { label_attr: { class: 'form-label' } }) }}
+                {{ form_widget(form.dateNaissance, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(form.dateNaissance) }}
+              </div>
+              <div class="form-group col-md-6 mb-4">
+                {{ form_label(form.role, 'Rôle', { label_attr: { class: 'form-label' } }) }}
+                {{ form_widget(form.role, { attr: { class: 'form-control' } }) }}
+                {{ form_errors(form.role) }}
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              {{ form_label(form.bio, 'Bio', { label_attr: { class: 'form-label' } }) }}
+              {{ form_widget(form.bio, {
+                  attr: { class: 'form-control', rows: 4, placeholder: 'Parlez-nous de vous...' }
+              }) }}
+              {{ form_errors(form.bio) }}
+            </div>
+
+            <div class="form-group mb-4">
+              {{ form_label(form.motDePasse, 'Nouveau mot de passe', { label_attr: { class: 'form-label' } }) }}
+              {{ form_widget(form.motDePasse, {
+                  attr: { class: 'form-control', placeholder: 'Laissez vide pour garder l’actuel' },
+                  empty_data: ''
+              }) }}
+              <small class="text-muted">Laissez vide pour conserver votre mot de passe actuel.</small>
+              {{ form_errors(form.motDePasse) }}
+            </div>
+
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary px-5">Enregistrer</button>
+            </div>
+
+          {{ form_end(form) }}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
