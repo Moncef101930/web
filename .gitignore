@@ -18,7 +18,7 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
+/config/client_secret_*.json
 ###> symfony/asset-mapper ###
 /public/assets/
 /assets/vendor/
