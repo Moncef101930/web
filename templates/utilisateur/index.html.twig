@@ -1,3 +1,4 @@
+{# templates/utilisateur/index.html.twig #}
 {% extends 'back.html.twig' %}
 
 {% block title %}Utilisateurs{% endblock %}
@@ -6,34 +7,22 @@
 <div class="content mt-3">
   <div class="animated fadeIn">
     <div class="card">
-
-      {# ─── Live Search + Sort + New Button ───────────────────────────── #}
       <div class="card-header">
-        <div class="form-row align-items-center">
-          <div class="col-auto">
-            <input type="text"
-                   id="search-input"
-                   class="form-control"
-                   placeholder="Rechercher…">
+        <div class="row w-100 align-items-center">
+          <div class="col-md-4">
+            <h5 class="mb-0">Liste des Utilisateurs</h5>
           </div>
-          <div class="col-auto">
-            <select id="sort-select" class="form-control">
-              <option value="">Trier par…</option>
-              <option value="id_asc">ID ↑</option>
-              <option value="id_desc">ID ↓</option>
-              <option value="nom_asc">Nom ↑</option>
-              <option value="nom_desc">Nom ↓</option>
-              <option value="prenom_asc">Prénom ↑</option>
-              <option value="prenom_desc">Prénom ↓</option>
-              <option value="email_asc">Email ↑</option>
-              <option value="email_desc">Email ↓</option>
-              <option value="role_asc">Rôle ↑</option>
-              <option value="role_desc">Rôle ↓</option>
-              <option value="dateNaissance_asc">Naissance ↑</option>
-              <option value="dateNaissance_desc">Naissance ↓</option>
-            </select>
+          <div class="col-md-4">
+            <form method="get" action="{{ path(app.request.attributes.get('_route')) }}" class="input-group">
+              <input type="text" name="search" value="{{ app.request.get('search') }}" class="form-control form-control-sm" placeholder="Rechercher Utilisateur">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-sm btn-primary">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </form>
           </div>
-          <div class="col-auto ml-auto">
+          <div class="col-md-4 text-right">
             <a class="btn btn-success btn-sm" href="{{ path('app_utilisateur_new') }}">
               <i class="fa fa-plus mr-1"></i> Nouvel Utilisateur
             </a>
@@ -41,79 +30,108 @@
         </div>
       </div>
 
-      {# ─── Table ────────────────────────────────────────────────────── #}
       <div class="card-body p-0">
+      
         <div class="table-responsive">
           <table class="table table-striped table-hover mb-0">
             <thead class="thead-light">
               <tr>
-                <th>ID</th><th>Nom</th><th>Prénom</th><th>Email</th>
-                <th>Rôle</th><th>Naissance</th><th>Bio</th><th>Photo</th><th class="text-center">Actions</th>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Naissance</th>
+                <th>Bio</th>
+                <th>Photo</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody id="user-table-body">
-              {{ include('utilisateur/_rows.html.twig') }}
+              {% for u in pagination %}
+                <tr>
+                  <td>{{ u.id }}</td>
+                  <td>{{ u.nom }}</td>
+                  <td>{{ u.prenom }}</td>
+                  <td>{{ u.email }}</td>
+                  <td>{{ u.role }}</td>
+                  <td>{{ u.dateNaissance ? u.dateNaissance|date('d/m/Y') : '-' }}</td>
+                  <td>{{ u.bio|length > 30 ? u.bio|slice(0,30) ~ '…' : u.bio }}</td>
+                  <td>
+                    <img 
+                      src="{{ asset('images/' ~ u.image) }}" 
+                      alt="{{ u.nom }}" 
+                      style="width:40px; height:40px; object-fit:cover; border-radius:4px;"
+                    >
+                  </td>
+                  <td class="text-center">
+                    <a 
+                        class="btn btn-sm btn-primary"
+                        title="Voir"
+                        href="{{ path('app_utilisateur_show', {'id': u.id}) }}"
+                    >
+                        <i class="fas fa-eye fa-fw"></i>Voir
+                    </a>
+                    <a 
+                        class="btn btn-sm btn-secondary"
+                        title="Modifier"
+                        href="{{ path('app_utilisateur_edit', {'id': u.id}) }}"
+                    >
+                        <i class="fas fa-edit fa-fw"></i>Modifier
+                    </a>
+                  </td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td colspan="9" class="text-center py-4">Aucun utilisateur trouvé.</td>
+                </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
       </div>
 
-      {# ─── Pagination ──────────────────────────────────────────────── #}
       <div class="card-footer">
-        <nav aria-label="Pagination">
-          <div id="user-pagination">
-            {{ include('utilisateur/_pagination.html.twig') }}
-          </div>
+        <nav aria-label="Page navigation">
+          {{ knp_pagination_render(pagination) }}
         </nav>
       </div>
 
     </div>
   </div>
 </div>
-{% endblock %}
 
-{% block javascripts %}
-  {{ parent() }}
-  <script>
-    (function($){
-      let debounce, currentSearch = '', currentSort = '', currentDir = '';
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.querySelector('input[name="search"]');
+  const tableBody = document.getElementById("user-table-body");
 
-      function loadPage(page=1) {
-        $.ajax({
-          url: "{{ path('app_utilisateur_index') }}",
-          data: {
-            search:    currentSearch,
-            sort:      currentSort,
-            direction: currentDir,
-            page:      page
-          },
-          success(response) {
-            $('#user-table-body').html(response.table);
-            $('#user-pagination').html(response.pagination);
-          }
-        });
-      }
+  let timer;
 
-      $(function(){
-        $('#search-input').on('input', function(){
-          clearTimeout(debounce);
-          currentSearch = $(this).val();
-          debounce = setTimeout(()=> loadPage(1), 300);
-        });
+  searchInput.addEventListener("keyup", function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const query = searchInput.value;
 
-        $('#sort-select').on('change', function(){
-          const [f, d] = $(this).val().split('_');
-          currentSort = f||'';
-          currentDir  = d||'';
-          loadPage(1);
-        });
+      fetch(`?search=${encodeURIComponent(query)}`, {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+      })
+      .then(response => response.text())
+      .then(html => {
+        // Create a temporary DOM parser
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
 
-        $(document).on('click', '#user-pagination a', function(e){
-          e.preventDefault();
-          const page = $(this).attr('href').match(/page=(\d+)/)[1];
-          loadPage(page);
-        });
+        // Get the new tbody from the response
+        const newTbody = doc.querySelector('#user-table-body');
+        if (newTbody) {
+          tableBody.innerHTML = newTbody.innerHTML;
+        }
       });
-    })(jQuery);
-  </script>
+    }, 300); // debounce
+  });
+});
+</script>
+
+
 {% endblock %}

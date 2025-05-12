@@ -7,13 +7,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Knp\Component\Pager\PaginatorInterface; 
-use Symfony\Component\HttpFoundation\JsonResponse;
-
 #[Route('/utilisateur')]
 class UtilisateurController extends AbstractController
 {
@@ -129,48 +128,30 @@ class UtilisateurController extends AbstractController
     #[Route('/', name: 'app_utilisateur_index', methods: ['GET'])]
     public function index(
         Request $request,
-        PaginatorInterface $paginator,
+        PaginatorInterface $paginator,         
         EntityManagerInterface $em
     ): Response {
+
+        $search = $request->query->get('search');
+
+
         $qb = $em->getRepository(Utilisateur::class)
-                 ->createQueryBuilder('u');
+                 ->createQueryBuilder('u')
+                 ->orderBy('u.nom', 'ASC');
+        
+        if ($search) {
+            $qb->where('u.nom LIKE :search')
+            ->orWhere('u.prenom LIKE :search')
+            ->orWhere('u.email LIKE :search')
+            ->setParameter('search', '%' . $search . '%');
+            }
 
-        // 1) search
-        $search = $request->query->get('search', '');
-        if ($search !== '') {
-            $qb->andWhere('u.nom LIKE :q OR u.prenom LIKE :q OR u.email LIKE :q')
-               ->setParameter('q', '%'.$search.'%');
-        }
-
-        // 2) sort
-        $sort      = $request->query->get('sort', '');
-        $direction = $request->query->get('direction', '');
-        $allowed   = ['id','nom','prenom','email','role','dateNaissance'];
-        if (in_array($sort, $allowed, true) && in_array(strtoupper($direction), ['ASC','DESC'], true)) {
-            $qb->orderBy('u.'.$sort, $direction);
-        } else {
-            $qb->orderBy('u.nom','ASC');
-        }
-
-        // 3) paginate
         $pagination = $paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
-            10
+            5
         );
 
-        // 4) if AJAX: return JSON with two rendered fragments
-        if ($request->isXmlHttpRequest()) {
-            $table      = $this->renderView('utilisateur/_rows.html.twig', ['pagination' => $pagination]);
-            $paginationHtml = $this->renderView('utilisateur/_pagination.html.twig', ['pagination' => $pagination]);
-
-            return new JsonResponse([
-                'table'      => $table,
-                'pagination' => $paginationHtml,
-            ]);
-        }
-
-        // 5) initial full render
         return $this->render('utilisateur/index.html.twig', [
             'pagination' => $pagination,
         ]);

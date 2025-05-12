@@ -24,3 +24,4 @@ final class CatafficheController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 }
+
